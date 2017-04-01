@@ -1,6 +1,6 @@
 {
   "name": "vndb",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "VNDB API wrapper",
   "main": "lib/index.js",
   "scripts": {
