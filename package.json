@@ -1,0 +1,22 @@
+{
+  "name": "vndb-reborn",
+  "version": "0.0.1",
+  "description": "VNDB API wrapper reborn",
+  "main": "lib/index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "jest"
+  },
+  "repository": "git@github.com:Permagate/vndb-reborn.git",
+  "author": "Permagate",
+  "license": "MIT",
+  "dependencies": {
+    "debug": "^2.6.3"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.1.2",
+    "eslint-plugin-import": "^2.2.0",
+    "jest": "^19.0.2"
+  }
+}

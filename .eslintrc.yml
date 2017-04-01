@@ -1,0 +1,9 @@
+extends: airbnb-base
+plugins:
+  - import
+rules:
+  arrow-parens: 0
+  no-underscore-dangle: 0
+  no-use-before-define: 0
+  space-before-function-paren: 0
+
