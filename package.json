@@ -1,13 +1,12 @@
 {
-  "name": "vndb-reborn",
+  "name": "vndb",
   "version": "0.0.1",
-  "description": "VNDB API wrapper reborn",
+  "description": "VNDB API wrapper",
   "main": "lib/index.js",
   "scripts": {
     "lint": "eslint .",
     "test": "jest"
   },
-  "repository": "git@github.com:Permagate/vndb-reborn.git",
   "author": "Permagate",
   "license": "MIT",
   "dependencies": {
@@ -18,5 +17,18 @@
     "eslint-config-airbnb-base": "^11.1.2",
     "eslint-plugin-import": "^2.2.0",
     "jest": "^19.0.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Permagate/vndb-reborn.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Permagate/vndb-reborn/issues"
+  },
+  "homepage": "https://github.com/Permagate/vndb-reborn",
+  "keywords": [
+    "VNDB",
+    "Visual Novel",
+    "API Wrapper"
+  ]
 }
