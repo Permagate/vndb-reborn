@@ -168,5 +168,80 @@ describe('Query Builder', () => {
       expect.assertions(1);
     });
   });
+
+  describe('set', () => {
+    test('ok', () => {
+      const res0 = Builder.set({
+        type: 'votelist',
+        id: 17,
+        fields: {
+          vote: 88,
+        },
+      });
+
+      expect(res0).toBe('set votelist 17 {"vote":88}');
+    });
+
+    test('error - incomplete argument', () => {
+      try {
+        Builder.set({
+          id: 17,
+          fields: {
+            vote: 88,
+          },
+        });
+      } catch (e) {
+        expect(e.message).toBe('Set command is missing type argument(s).');
+      }
+
+      try {
+        Builder.set({
+          type: 'votelist',
+          fields: {
+            vote: 88,
+          },
+        });
+      } catch (e) {
+        expect(e.message).toBe('Set command is missing id argument(s).');
+      }
+
+      try {
+        Builder.set({
+          type: 'votelist',
+          id: 17,
+        });
+      } catch (e) {
+        expect(e.message).toBe('Set command is missing fields argument(s).');
+      }
+
+      try {
+        Builder.set({});
+      } catch (e) {
+        expect(e.message).toBe('Set command is missing type, id, fields argument(s).');
+      }
+
+      expect.assertions(4);
+    });
+
+    test('error - invalid argument', () => {
+      try {
+        Builder.set('body pls');
+      } catch (e) {
+        expect(e.message).toBe('Set command has non-object argument.');
+      }
+
+      try {
+        Builder.set({
+          type: 'votelist',
+          id: 17,
+          fields: 'body pls',
+        });
+      } catch (e) {
+        expect(e.message).toBe('Set command has non-object fields argument.');
+      }
+
+      expect.assertions(2);
+    });
+  });
 });
 
