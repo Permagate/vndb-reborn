@@ -118,7 +118,7 @@ describe('Query Builder', () => {
 
     test('error - incomplete argument', () => {
       try {
-        Builder.get();
+        Builder.get({});
       } catch (e) {
         expect(e.message).toBe('Get command is missing type, flags, filters argument(s).');
       }
@@ -155,6 +155,12 @@ describe('Query Builder', () => {
 
     test('error - invalid argument', () => {
       try {
+        Builder.get();
+      } catch (e) {
+        expect(e.message).toBe('Get command has non-object argument.');
+      }
+
+      try {
         Builder.get({
           type: 'vn',
           flags: 'basic,anime',
@@ -165,7 +171,7 @@ describe('Query Builder', () => {
         expect(e.message).toBe('Get command has non-object options argument.');
       }
 
-      expect.assertions(1);
+      expect.assertions(2);
     });
   });
 
