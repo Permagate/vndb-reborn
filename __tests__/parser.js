@@ -6,8 +6,7 @@ describe('Query parser', () => {
     test('ok', () => {
       const res0 = Parser.login('ok');
 
-      expect(res0.isError).toBe(false);
-      expect(res0.result).toBe('ok');
+      expect(res0).toBe('ok');
     });
   });
 
@@ -16,8 +15,7 @@ describe('Query parser', () => {
       const res0 = Parser.dbstats('dbstats {"vn":30000,"users":5}');
       const res1 = Parser.dbstats('error {"id":"parse"}');
 
-      expect(res0.isError).toBe(false);
-      expect(res0.result).toEqual(expect.objectContaining({
+      expect(res0).toEqual(expect.objectContaining({
         vn: 30000,
         users: 5,
       }));
@@ -40,8 +38,7 @@ describe('Query parser', () => {
       const res0 = Parser.get('results {"num":0,"more":false,"items":[]}');
       const res1 = Parser.get('error {"id":"parse"}');
 
-      expect(res0.isError).toBe(false);
-      expect(res0.result).toEqual(expect.objectContaining({
+      expect(res0).toEqual(expect.objectContaining({
         num: 0,
         more: false,
         items: [],
@@ -64,8 +61,7 @@ describe('Query parser', () => {
     test('ok', () => {
       const res0 = Parser.set('ok');
 
-      expect(res0.isError).toBe(false);
-      expect(res0.result).toBe('ok');
+      expect(res0).toBe('ok');
     });
   });
 
@@ -74,8 +70,7 @@ describe('Query parser', () => {
       const res0 = Parser.error('error {"id":"parse"}');
       const res1 = Parser.error('results {"num":0,"more":false,"items":[]}');
 
-      expect(res0.isError).toBe(true);
-      expect(res0.result).toEqual(expect.objectContaining({ id: 'parse' }));
+      expect(res0).toEqual(expect.objectContaining({ id: 'parse' }));
       expect(res1).toBe(null);
     });
 
