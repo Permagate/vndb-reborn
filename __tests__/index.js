@@ -119,5 +119,26 @@ describe('With builder', () => {
     }));
     expect(vndb.socket.destroyed).toBe(true);
   });
+
+  test('ok - errors', async () => {
+    const vndb = await VNDB.start();
+    await vndb.login({
+      protocol: 1,
+      client: 'VNDB-Reborn-Tester',
+      clientver: '0.0.1',
+    });
+
+    try {
+      await vndb.get({
+        type: 'vn',
+        flags: ['basic', 'anime'],
+        filters: 'invalid filters',
+      });
+    } catch (e) {
+      expect(e.detail.msg).toBe('Invalid filter expression');
+    }
+
+    expect.assertions(1);
+  });
 });
 
