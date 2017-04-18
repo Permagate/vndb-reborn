@@ -59,3 +59,65 @@ describe('Raw', () => {
   });
 });
 
+describe('With builder', () => {
+  test('ok', async () => {
+    const vndb = await VNDB.start();
+    const res0 = await vndb.login({
+      protocol: 1,
+      client: 'VNDB-Reborn-Tester',
+      clientver: '0.0.1',
+    });
+    const res1 = await vndb.dbstats();
+    const res2 = await vndb.get({
+      type: 'vn',
+      flags: ['basic', 'anime'],
+      filters: 'id = 17',
+    });
+    await vndb.end();
+
+    expect(vndb.socket).toBeTruthy();
+    expect(res0).toBe('ok');
+    expect(res1).toEqual(expect.objectContaining({
+      users: expect.any(Number),
+      vn: expect.any(Number),
+    }));
+    expect(res2).toEqual(expect.objectContaining({
+      num: expect.any(Number),
+      more: expect.any(Boolean),
+      items: expect.any(Array),
+    }));
+    expect(vndb.socket.destroyed).toBe(true);
+  });
+
+  test('ok - multiple messages', async () => {
+    const vndb = await VNDB.start();
+    const res0 = await vndb.login({
+      protocol: 1,
+      client: 'VNDB-Reborn-Tester',
+      clientver: '0.0.1',
+    });
+    const res1 = await Promise.all([
+      vndb.dbstats(),
+      vndb.get({
+        type: 'vn',
+        flags: ['basic', 'anime'],
+        filters: 'id = 17',
+      }),
+    ]);
+    await vndb.end();
+
+    expect(vndb.socket).toBeTruthy();
+    expect(res0).toBe('ok');
+    expect(res1[0]).toEqual(expect.objectContaining({
+      users: expect.any(Number),
+      vn: expect.any(Number),
+    }));
+    expect(res1[1]).toEqual(expect.objectContaining({
+      num: expect.any(Number),
+      more: expect.any(Boolean),
+      items: expect.any(Array),
+    }));
+    expect(vndb.socket.destroyed).toBe(true);
+  });
+});
+
